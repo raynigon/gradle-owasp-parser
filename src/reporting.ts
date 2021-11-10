@@ -11,15 +11,14 @@ async function findDependencyDefinitions(buildGradle: string, dependencies: Vuln
         const coordinates_small = `"${dependency.coordinates.groupId}:${dependency.coordinates.groupId}"`
         const coordinates_full = `"${dependency.coordinates.groupId}:${dependency.coordinates.artifactId}:${dependency.coordinates.version}"`
         let index = 1
-        for (const line of lines) {
+        lines: for (const line of lines) {
             let searchString = null
             if (line.includes(coordinates_full)) {
                 searchString = coordinates_full
-            }
-            else if (line.includes(coordinates_small)) {
+            } else if (line.includes(coordinates_small)) {
                 searchString = coordinates_small
             } else {
-                continue
+                continue lines;
             }
             const startColumn = line.indexOf(searchString)
             const endColumn = startColumn + searchString.length
@@ -30,6 +29,7 @@ async function findDependencyDefinitions(buildGradle: string, dependencies: Vuln
                 startColumn: startColumn,
                 endColumn: endColumn
             })
+            break lines;
         }
 
     }
@@ -41,7 +41,7 @@ export async function reportToGitHub(report: OwaspReport, buildGradle: string) {
     for (const dependency of report.dependencies) {
         const coordinates_full = `"${dependency.coordinates.groupId}:${dependency.coordinates.artifactId}:${dependency.coordinates.version}"`
         const annotation = annotations.get(coordinates_full)
-        if (!annotation){
+        if (!annotation) {
             core.error(`Annoatation not found for ${coordinates_full} in ${JSON.stringify(annotations)}`)
             continue
         }
