@@ -9,7 +9,7 @@ async function main() {
     core.info(`Parse ${reportFile} and validate for ${buildGradleFile}`)
 
     // Logic
-    const report = parseReport(reportFile)
+    const report = await parseReport(reportFile)
     core.info(`Report: ${report}}`)
 }
 main()
