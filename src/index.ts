@@ -10,7 +10,7 @@ async function main() {
 
     // Logic
     const report = await parseReport(reportFile)
-    core.info(`Report: ${report}}`)
+    core.info(`Report: ${JSON.stringify(report)}`)
 }
 main()
     .then(() => {

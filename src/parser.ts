@@ -26,7 +26,7 @@ function parseMavenCoordinates(filepath: string): MavenCoordinate | null {
     let group_name = null
     let artifact_name = null
     let version = null
-    for (const item in parts) {
+    for (const item of parts) {
         if (item == "") {
             state = 0
             continue

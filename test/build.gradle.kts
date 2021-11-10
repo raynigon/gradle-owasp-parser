@@ -9,6 +9,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     runtimeOnly("org.postgresql:postgresql")
+    testImplementation("org.testcontainers:postgresql")
     kapt("org.springframework.boot:spring-boot-configuration-processor")
     implementation("org.apache.commons:commons-collections4:4.4")
 }
