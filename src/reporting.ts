@@ -8,7 +8,7 @@ async function findDependencyDefinitions(buildGradle: string, dependencies: Vuln
     const lines = buffer.split("\n")
     const result = new Map<string, core.AnnotationProperties>()
     for (const dependency of dependencies) {
-        const coordinates_small = `"${dependency.coordinates.groupId}:${dependency.coordinates.groupId}"`
+        const coordinates_small = `"${dependency.coordinates.groupId}:${dependency.coordinates.artifactId}"`
         const coordinates_full = `"${dependency.coordinates.groupId}:${dependency.coordinates.artifactId}:${dependency.coordinates.version}"`
         let index = 1
         lines: for (const line of lines) {
@@ -18,7 +18,6 @@ async function findDependencyDefinitions(buildGradle: string, dependencies: Vuln
             } else if (line.includes(coordinates_small)) {
                 searchString = coordinates_small
             } else {
-                core.info(`Line: ${line} does not include ${coordinates_small}`)
                 continue lines;
             }
             const startColumn = line.indexOf(searchString)
