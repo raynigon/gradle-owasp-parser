@@ -1,0 +1,17 @@
+name: Test
+
+on:
+  push:
+    branches: [ ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest    
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build
+      uses: raynigon/gradle-owasp-parser@main
+      with:
+        path_report: "test/"
+        path_build_gradle: "test/"
+
