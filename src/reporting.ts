@@ -42,14 +42,16 @@ export async function reportToGitHub(report: OwaspReport, buildGradle: string) {
     for (const dependency of report.dependencies) {
         const coordinates_full = `"${dependency.coordinates.groupId}:${dependency.coordinates.artifactId}:${dependency.coordinates.version}"`
         let annotation = annotations.get(coordinates_full)
+        let prefix = ""
         if (!annotation) {
             core.info(`Dependency not found for ${coordinates_full}}`)
             annotation = { file: buildGradle, startLine: 1 }
+            prefix = `Dependency: ${coordinates_full}\nDescription: `
         }
         for (const vulnerability of dependency.vulnerabilities) {
             const name = (vulnerability as any).name
             const description = (vulnerability as any).description
-            core.warning(description, { ...annotation, title: name })
+            core.warning(`${prefix}${description}`, { ...annotation, title: name })
         }
     }
     core.info(`Report: ${JSON.stringify(report)}`)
