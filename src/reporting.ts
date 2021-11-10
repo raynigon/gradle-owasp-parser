@@ -18,6 +18,7 @@ async function findDependencyDefinitions(buildGradle: string, dependencies: Vuln
             } else if (line.includes(coordinates_small)) {
                 searchString = coordinates_small
             } else {
+                index++;
                 continue lines;
             }
             const startColumn = line.indexOf(searchString)
