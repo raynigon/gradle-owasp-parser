@@ -10,7 +10,11 @@ async function main() {
 
     // Logic
     const report = parseReport(reportFile)
+    core.info(`Report: ${report}}`)
 }
-main().catch((error) => {
-    core.setFailed(error.message);
-})
+main()
+    .then(() => {
+        core.info("Finished parsing")
+    }).catch((error) => {
+        core.setFailed(error.message);
+    })
