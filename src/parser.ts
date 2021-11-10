@@ -58,6 +58,7 @@ function parseMavenCoordinates(filepath: string): MavenCoordinate | null {
         }
     }
     if (group_name == null || artifact_name == null) {
+        core.warning(`Unable to parse filepath: ${filepath}`)
         return null
     }
     return {
