@@ -61,7 +61,7 @@
             "name": "package name",
             "value": "testcontainers"
           }
-        ],
+        ]
       },
       "vulnerabilityIds": [
         {
