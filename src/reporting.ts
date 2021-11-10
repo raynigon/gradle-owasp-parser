@@ -18,6 +18,7 @@ async function findDependencyDefinitions(buildGradle: string, dependencies: Vuln
             } else if (line.includes(coordinates_small)) {
                 searchString = coordinates_small
             } else {
+                core.info(`Line: ${line} does not include ${coordinates_small}`)
                 continue lines;
             }
             const startColumn = line.indexOf(searchString)
@@ -42,7 +43,7 @@ export async function reportToGitHub(report: OwaspReport, buildGradle: string) {
         const coordinates_full = `"${dependency.coordinates.groupId}:${dependency.coordinates.artifactId}:${dependency.coordinates.version}"`
         const annotation = annotations.get(coordinates_full)
         if (!annotation) {
-            core.error(`Annoatation not found for ${coordinates_full} in ${JSON.stringify(annotations)}`)
+            core.error(`Annotation not found for ${coordinates_full} in ${JSON.stringify(annotations)}`)
             continue
         }
         for (const vulnerability of dependency.vulnerabilities) {
