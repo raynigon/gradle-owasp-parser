@@ -4,6 +4,10 @@ branding:
   icon: 'file-text'  
   color: 'blue'
 inputs:
+  fail_on_vulnerabilities:
+    description: "True if the process should fail when vulnerabilities exist. False if not."
+    required: false
+    default: "true"
   path_report:
     required: true
     description: "Path to report file in json format"

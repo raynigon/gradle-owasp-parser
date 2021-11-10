@@ -54,5 +54,4 @@ export async function reportToGitHub(report: OwaspReport, buildGradle: string) {
             core.warning(`${prefix}${description}`, { ...annotation, title: name })
         }
     }
-    core.info(`Report: ${JSON.stringify(report)}`)
 }
