@@ -12,6 +12,6 @@ jobs:
     - name: Build
       uses: raynigon/gradle-owasp-parser@main
       with:
-        path_report: "test/"
-        path_build_gradle: "test/"
+        path_report: "test/report.json"
+        path_build_gradle: "test/build.gradle.kts"
 
