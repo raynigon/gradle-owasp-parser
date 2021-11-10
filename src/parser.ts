@@ -1,22 +1,22 @@
 import * as core from '@actions/core';
 import fs from "fs";
 
-interface OwaspReport {
+export interface OwaspReport {
     dependencies: VulnerableDependency[]
 }
 
-interface VulnerableDependency {
+export interface VulnerableDependency {
     coordinates: MavenCoordinate
     vulnerabilities: Vulnerability[]
 }
 
-interface MavenCoordinate {
+export interface MavenCoordinate {
     groupId: string,
     artifactId: string,
     version: string | null
 }
 
-interface Vulnerability {
+export interface Vulnerability {
 
 }
 
@@ -68,12 +68,12 @@ function parseMavenCoordinates(filepath: string): MavenCoordinate | null {
     }
 }
 
-async function parseReport(reportFile: string): Promise<OwaspReport | null> {
+export async function parseReport(reportFile: string): Promise<OwaspReport> {
     const buffer = await fs.promises.readFile(reportFile, { encoding: "utf-8" })
     const report = JSON.parse(buffer as string)
     const dependencies = report["dependencies"]
     if (!dependencies) {
-        return null
+        return { dependencies: [] }
     }
     const result: Array<VulnerableDependency> = []
     for (const dependency of dependencies) {
@@ -95,8 +95,4 @@ async function parseReport(reportFile: string): Promise<OwaspReport | null> {
         })
     }
     return { dependencies: result }
-}
-
-export {
-    parseReport
 }
