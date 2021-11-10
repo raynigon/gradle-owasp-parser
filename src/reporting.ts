@@ -41,7 +41,10 @@ export async function reportToGitHub(report: OwaspReport, buildGradle: string) {
     for (const dependency of report.dependencies) {
         const coordinates_full = `"${dependency.coordinates.groupId}:${dependency.coordinates.artifactId}:${dependency.coordinates.version}"`
         const annotation = annotations.get(coordinates_full)
-        if (!annotation) continue
+        if (!annotation){
+            core.error(`Annoatation not found for ${coordinates_full} in ${JSON.stringify(annotations)}`)
+            continue
+        }
         for (const vulnerability of dependency.vulnerabilities) {
             core.warning("Found vulnerability", { ...annotation, title: (vulnerability as any).name })
         }
