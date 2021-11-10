@@ -46,7 +46,9 @@ export async function reportToGitHub(report: OwaspReport, buildGradle: string) {
             continue
         }
         for (const vulnerability of dependency.vulnerabilities) {
-            core.warning("Found vulnerability", { ...annotation, title: (vulnerability as any).name })
+            const name = (vulnerability as any).name
+            const description  = (vulnerability as any).description
+            core.warning(`In ${buildGradle}:${annotation.startLine} the vulnerability ${name} was found. Description: ${description}`, { ...annotation, title: name })
         }
     }
     core.info(`Report: ${JSON.stringify(report)}`)
