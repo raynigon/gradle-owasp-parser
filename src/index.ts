@@ -1,4 +1,5 @@
 import * as core from '@actions/core';
+import { writeOutput } from './output';
 import { parseReport } from './parser';
 import { reportToGitHub } from './reporting';
 
@@ -12,6 +13,7 @@ async function main() {
     // Logic
     const report = await parseReport(reportFile)
     await reportToGitHub(report, buildGradleFile)
+    await writeOutput(report)
 }
 main()
     .then(() => {
