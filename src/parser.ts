@@ -85,10 +85,8 @@ export async function parseReport(reportFile: string): Promise<OwaspReport> {
             continue
         }
         const mavenCoordinates = parseMavenCoordinates(dependency["filePath"])
-        if (mavenCoordinates == null) {
-            core.warning("Unable to parse...")
-        }
-        core.info(`Found ${vulnerabilities.length} vulnerabilities in ${dependency.name}`)
+        if (mavenCoordinates == null) continue;
+        core.info(`Found ${vulnerabilities.length} vulnerabilities in ${dependency["fileName"]}`)
         result.push({
             coordinates: mavenCoordinates as MavenCoordinate,
             vulnerabilities: vulnerabilities
