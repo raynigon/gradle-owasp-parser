@@ -10,7 +10,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build
-      uses: raynigon/gradle-owasp-parser@main
+      uses: raynigon/gradle-owasp-parser@test/test
       with:
         path_report: "test/report.json"
         path_build_gradle: "test/build.gradle.kts"
