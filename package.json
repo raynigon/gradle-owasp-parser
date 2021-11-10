@@ -1,0 +1,34 @@
+{
+    "name": "gradle-owasp-parser",
+    "version": "0.0.9",
+    "description": "GitHub Action to create a release documentation from the repository PRs",
+    "main": "out/index.js",
+    "scripts": {
+        "build": "npx ncc build src/index.ts -m -o out",
+        "watch": "npx ncc build src/index.ts -m -w -o out",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/raynigon/gradle-owasp-parser.git"
+    },
+    "keywords": [],
+    "author": "Simon Schneider",
+    "license": "Apache 2.0",
+    "bugs": {
+        "url": "https://github.com/raynigon/gradle-owasp-parser/issues"
+    },
+    "homepage": "https://github.com/raynigon/gradle-owasp-parser#readme",
+    "dependencies": {
+        "@actions/core": "^1.2.7",
+        "@actions/exec": "^1.0.4",
+        "@actions/github": "^5.0.0",
+        "mustache": "^4.2.0"
+    },
+    "devDependencies": {
+        "@types/mustache": "^4.1.1",
+        "@types/node": "^15.3.0",
+        "@vercel/ncc": "^0.28.5",
+        "typescript": "^4.2.4"
+    }
+}

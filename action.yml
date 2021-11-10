@@ -1,0 +1,15 @@
+name: 'gradle owasp parser'
+description: 'Parse and print the OWASP Check report for gradle'
+branding:
+  icon: 'file-text'  
+  color: 'blue'
+inputs:
+  path_report:
+    required: true
+    description: "Path to report file in json format"
+  path_build_gradle:
+    required: true
+    description: "Path to build.gradle or build.gradle.kts"
+runs:
+  using: 'node12'
+  main: 'out/index.js'
