@@ -19,3 +19,14 @@ jobs:
       - name: "Build"
         run: |
           npm run build
+
+  test:
+    name: "Test Action"
+    runs-on: ubuntu-latest    
+    steps:
+    - uses: actions/checkout@v2
+    - name: "Parse Report"
+      uses: raynigon/gradle-owasp-parser@main
+      with:
+        path_report: "test/report.json"
+        path_build_gradle: "test/build.gradle.kts"
