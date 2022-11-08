@@ -22,5 +22,5 @@ outputs:
   vulnerabilities:
     description: 'Comma seperated list of CVE ids'
 runs:
-  using: 'node12'
+  using: 'node16'
   main: 'out/index.js'
