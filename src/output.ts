@@ -3,15 +3,14 @@ import * as core from '@actions/core';
 
 function generateMarkdownReport(report: OwaspReport): string {
     const prefix = "The following depencies contain vulnerabilities "
-    const header = "| Dependency | Vulnerabilities |\n" +
-                   "| ---------- | --------------- |\n";
+    const header = "| Vulnerability | Dependency | Description |\n" +
+                   "| ------------- | ---------- | ----------- |\n";
     let body = ""
     for(let dependency of report.dependencies){
-        const vulnerabilityIds = Array.from(dependency.vulnerabilities)
-            .flatMap((item: Vulnerability) => item.name)
-            .join(',')
-        
-        body += `| ${dependency.coordinates.groupId}:${dependency.coordinates.artifactId} | ${vulnerabilityIds} |\n`
+        for(let vulnerability of dependency.vulnerabilities) {
+            body += `| ${vulnerability.name} | ${dependency.coordinates.groupId}:${dependency.coordinates.artifactId} | ${vulnerability.description} |\n`
+
+        }        
     }
     return prefix + header + body
 }
