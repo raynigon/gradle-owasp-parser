@@ -2,13 +2,18 @@ import { OwaspReport, Vulnerability, VulnerableDependency } from "./parser";
 import * as core from '@actions/core';
 
 function generateMarkdownReport(report: OwaspReport): string {
-    const prefix = "The following depencies contain vulnerabilities "
-    const header = "| Vulnerability | Dependency | Description |\n" +
-                   "| ------------- | ---------- | ----------- |\n";
+    const prefix = "The following dependencies contain vulnerabilities. Please check if these vulnerabilities are relevant and ignore them if necessary.\n\n"
+    const header = "| Vulnerability | Dependency | Description | IgnoreXML |\n" +
+                   "| ------------- | ---------- | ----------- | --------- |\n";
     let body = ""
     for(let dependency of report.dependencies){
         for(let vulnerability of dependency.vulnerabilities) {
-            body += `| ${vulnerability.name} | ${dependency.coordinates.groupId}:${dependency.coordinates.artifactId} | ${vulnerability.description} |\n`
+            let description = vulnerability.description.replace("\n", " ")
+            if (description.length > 100) {
+                description = description.substring(0, 100) + "..."
+            }
+            body += `| ${vulnerability.name} | ${dependency.coordinates.groupId}:${dependency.coordinates.artifactId} `+
+                    `| ${description} | \`<suppress><cve>${vulnerability.name}</cve></suppress>\` |\n`
 
         }        
     }
