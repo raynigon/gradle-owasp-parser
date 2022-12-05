@@ -17,7 +17,10 @@ export interface MavenCoordinate {
 }
 
 export interface Vulnerability {
-
+    source: string,
+    name: string,
+    severity: "LOW" | "MEDIUM" | "HIGH" | "CRITICAL"
+    description: string
 }
 
 function parseMavenCoordinates(filepath: string): MavenCoordinate | null {

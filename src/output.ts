@@ -1,14 +1,19 @@
-import { OwaspReport, VulnerableDependency } from "./parser";
+import { OwaspReport, Vulnerability, VulnerableDependency } from "./parser";
 import * as core from '@actions/core';
 
 function generateMarkdownReport(report: OwaspReport): string {
+    const prefix = "The following depencies contain vulnerabilities "
     const header = "| Dependency | Vulnerabilities |\n" +
                    "| ---------- | --------------- |\n";
     let body = ""
     for(let dependency of report.dependencies){
-        body += `| ${dependency.coordinates.groupId}:${dependency.coordinates.artifactId} | ${Array.from(dependency.vulnerabilities).join(' ')} |\n`
+        const vulnerabilityIds = Array.from(dependency.vulnerabilities)
+            .flatMap((item: Vulnerability) => item.name)
+            .join(',')
+        
+        body += `| ${dependency.coordinates.groupId}:${dependency.coordinates.artifactId} | ${vulnerabilityIds} |\n`
     }
-    return header + body
+    return prefix + header + body
 }
 
 export async function writeOutput(report: OwaspReport) {
