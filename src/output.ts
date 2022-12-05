@@ -9,9 +9,6 @@ function generateMarkdownReport(report: OwaspReport): string {
     for(let dependency of report.dependencies){
         for(let vulnerability of dependency.vulnerabilities) {
             let description = vulnerability.description.replace("\n", " ")
-            if (description.length > 100) {
-                description = description.substring(0, 100) + "..."
-            }
             body += `| ${vulnerability.name} | ${dependency.coordinates.groupId}:${dependency.coordinates.artifactId} `+
                     `| ${description} | \`<suppress><cve>${vulnerability.name}</cve></suppress>\` |\n`
 
