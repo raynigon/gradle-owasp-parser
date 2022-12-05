@@ -12,7 +12,7 @@ function generateMarkdownReport(report: OwaspReport): string {
             body += `<td>${vulnerability.name}</td>`
             body += `<td>${dependency.coordinates.groupId}:${dependency.coordinates.artifactId}</td>`
             body += `<td>${description}</td>`
-            body += `<td><pre lang="xml">&lt;suppress&gt;&lt;cve>${vulnerability.name}&lt;/cve&gt;&lt;/suppress&gt;</pre></td>`
+            body += `<td><pre lang="xml">&lt;suppress&gt;<br />&lt;cve>${vulnerability.name}&lt;/cve&gt;<br />&lt;/suppress&gt;</pre></td>`
             body += "</tr>"
         }        
     }
