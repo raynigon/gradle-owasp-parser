@@ -24,7 +24,7 @@ jobs:
     name: "Test Action"
     runs-on: ubuntu-latest    
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: "Parse Report"
       uses: raynigon/gradle-owasp-parser@main
       with:
