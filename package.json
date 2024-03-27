@@ -1,6 +1,6 @@
 {
     "name": "gradle-owasp-parser",
-    "version": "0.0.9",
+    "version": "0.0.10",
     "description": "GitHub Action to create a release documentation from the repository PRs",
     "main": "out/index.js",
     "scripts": {
